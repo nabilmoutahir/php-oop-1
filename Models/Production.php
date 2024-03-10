@@ -5,7 +5,7 @@ include_once __DIR__ . "/Title.php";
 include_once __DIR__ . "/Vote.php";
 
 include_once __DIR__ . "/Movie.php";
-
+include_once __DIR__ . "/TVSerie.php";
 
 class Production
 {
