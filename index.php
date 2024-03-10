@@ -1,11 +1,4 @@
 <?php
-// INCLUDE
-
-include_once __DIR__ . "/data/db.php";
-
-
-
-
 // CLASS
 
     class Production {
@@ -14,7 +7,7 @@ include_once __DIR__ . "/data/db.php";
         public $language_movie;
         public $vote_rate;
 
-        public function __construct($title_name, $language_movie, Vote $vote_rate) {
+        public function __construct($title_name, Language $language_movie, Vote $vote_rate) {
             $this->title_name = $title_name;
             $this->language_movie = $language_movie;
             $this->vote_rate = $vote_rate;
@@ -26,11 +19,26 @@ include_once __DIR__ . "/data/db.php";
     //     public $title;
     // };
 
-    // class Language {
-    //     public $language;
-    // };
+    // GET CLASS LANGUAGE
+    class Language {
 
-    // GET VOTE
+        public $language;
+
+        public function get_language() {
+
+            include_once __DIR__ . "/data/db.php";
+
+            $lang = $langs[array_rand($langs)];
+
+            $this->language = $lang;
+
+            return $this->language;
+        
+        }
+
+    };
+
+    // GET CLASS VOTE
     class Vote{
         public $vote;
 
@@ -41,7 +49,7 @@ include_once __DIR__ . "/data/db.php";
     };
     
     // NEW INSTANCE
-    $Production_1 = new Production ('test', "test", new Vote);
+    $Production_1 = new Production ('test', new Language, new Vote);
 
 ?>
 
@@ -77,7 +85,7 @@ include_once __DIR__ . "/data/db.php";
                 <?= $Production_1->title_name ?>
             </td>
             <td>
-                <?= $Production_1->language_movie ?>
+                <?= $Production_1->language_movie->get_language() ?>
             </td>
             <td>
                 <?= $Production_1->vote_rate->get_vote() ?>
