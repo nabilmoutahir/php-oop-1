@@ -1,7 +1,7 @@
 <?php
 // INCLUDE
 
-
+include_once __DIR__ . "/data/db.php";
 
 
 
@@ -14,7 +14,7 @@
         public $language_movie;
         public $vote_rate;
 
-        public function __construct($title_name, $language_movie, $vote_rate) {
+        public function __construct($title_name, $language_movie, Vote $vote_rate) {
             $this->title_name = $title_name;
             $this->language_movie = $language_movie;
             $this->vote_rate = $vote_rate;
@@ -30,12 +30,18 @@
     //     public $language;
     // };
 
+    // GET VOTE
+    class Vote{
+        public $vote;
 
-    // class Vote{
-    //     public $title;
-    // };
+        public function get_vote(){
+            $this -> vote = rand(1,10);
+            return $this -> vote;
+        }
+    };
     
-    $Production_1 = new Production ('test', "test", "test");
+    // NEW INSTANCE
+    $Production_1 = new Production ('test', "test", new Vote);
 
 ?>
 
@@ -74,7 +80,7 @@
                 <?= $Production_1->language_movie ?>
             </td>
             <td>
-                <?= $Production_1->vote_rate ?>
+                <?= $Production_1->vote_rate->get_vote() ?>
             </td>
     </tr>
     <tr>
