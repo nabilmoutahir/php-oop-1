@@ -7,7 +7,7 @@
         public $language_movie;
         public $vote_rate;
 
-        public function __construct($title_name, Language $language_movie, Vote $vote_rate) {
+        public function __construct(Title $title_name, Language $language_movie, Vote $vote_rate) {
             $this->title_name = $title_name;
             $this->language_movie = $language_movie;
             $this->vote_rate = $vote_rate;
@@ -15,9 +15,21 @@
     };
 
 
-    // class Title {
-    //     public $title;
-    // };
+    class Title {
+        public $title;
+
+        public function get_title() {
+
+            include_once __DIR__ . "/data/titles.php";
+
+            $movie = $movies[array_rand($movies)];
+
+            $this->title = $movie;
+
+            return $this->title;
+
+        }
+    };
 
     // GET CLASS LANGUAGE
     class Language {
@@ -26,7 +38,7 @@
 
         public function get_language() {
 
-            include_once __DIR__ . "/data/db.php";
+            include_once __DIR__ . "/data/languages.php";
 
             $lang = $langs[array_rand($langs)];
 
@@ -49,7 +61,7 @@
     };
     
     // NEW INSTANCE
-    $Production_1 = new Production ('test', new Language, new Vote);
+    $Production_1 = new Production (new Title, new Language, new Vote);
 
 ?>
 
@@ -82,7 +94,7 @@
             1
         </th>
             <td>
-                <?= $Production_1->title_name ?>
+                <?= $Production_1->title_name->get_title() ?>
             </td>
             <td>
                 <?= $Production_1->language_movie->get_language() ?>
